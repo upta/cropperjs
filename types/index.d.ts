@@ -1,24 +1,61 @@
-declare namespace Cropper {
-  export enum DragMode {
+declare class Cropper
+{
+  constructor( element: HTMLImageElement | HTMLCanvasElement, options?: Cropper.Options );
+  clear(): Cropper;
+  crop(): Cropper;
+  destroy(): Cropper;
+  disable(): Cropper;
+  enable(): Cropper;
+  getCanvasData(): Cropper.CanvasData;
+  getContainerData(): Cropper.ContainerData;
+  getCropBoxData(): Cropper.CropBoxData;
+  getCroppedCanvas( options?: Cropper.GetCroppedCanvasOptions ): HTMLCanvasElement;
+  getData( rounded?: boolean ): Cropper.Data;
+  getImageData(): Cropper.ImageData;
+  move( offsetX: number, offsetY?: number ): Cropper;
+  moveTo( x: number, y?: number ): Cropper;
+  replace( url: string, onlyColorChanged?: boolean ): Cropper;
+  reset(): Cropper;
+  rotate( degree: number ): Cropper;
+  rotateTo( degree: number ): Cropper;
+  scale( scaleX: number, scaleY?: number ): Cropper;
+  scaleX( scaleX: number ): Cropper;
+  scaleY( scaleY: number ): Cropper;
+  setAspectRatio( aspectRatio: number ): Cropper;
+  setCanvasData( data: Cropper.SetCanvasDataOptions ): Cropper;
+  setCropBoxData( data: Cropper.SetCropBoxDataOptions ): Cropper;
+  setData( data: Cropper.SetDataOptions ): Cropper;
+  setDragMode( dragMode: Cropper.DragMode ): Cropper;
+  zoom( ratio: number ): Cropper;
+  zoomTo( ratio: number, pivot?: { x: number; y: number } ): Cropper;
+}
+
+declare namespace Cropper
+{
+  export enum DragMode
+  {
     Crop = 'crop',
     Move = 'move',
     None = 'none',
   }
 
-  export enum ViewMode {
+  export enum ViewMode
+  {
     Free = 0,
     CanvasWidthAndHeightShouldNotBeLessThanCropBoxSize = 1,
     CanvasWidthOrHeightShouldNotBeLessThanContainerSize = 2,
     CanvasWidthAndHeightShouldNotBeLessThanContainerSize = 3,
   }
 
-  export enum ImageSmoothingQuality {
+  export enum ImageSmoothingQuality
+  {
     Low = 'low',
     Medium = 'medium',
     High = 'high',
   }
 
-  export interface Data {
+  export interface Data
+  {
     x: number;
     y: number;
     width: number;
@@ -28,12 +65,14 @@ declare namespace Cropper {
     scaleY: number;
   }
 
-  export interface ContainerData {
+  export interface ContainerData
+  {
     width: number;
     height: number;
   }
 
-  export interface ImageData {
+  export interface ImageData
+  {
     left: number;
     top: number;
     width: number;
@@ -46,7 +85,8 @@ declare namespace Cropper {
     aspectRatio: number;
   }
 
-  export interface CanvasData {
+  export interface CanvasData
+  {
     left: number;
     top: number;
     width: number;
@@ -55,14 +95,16 @@ declare namespace Cropper {
     naturalHeight: number;
   }
 
-  export interface CropBoxData {
+  export interface CropBoxData
+  {
     left: number;
     top: number;
     width: number;
     height: number;
   }
 
-  export interface GetCroppedCanvasOptions {
+  export interface GetCroppedCanvasOptions
+  {
     width?: number;
     height?: number;
     minWidth?: number;
@@ -74,7 +116,8 @@ declare namespace Cropper {
     imageSmoothingQuality?: ImageSmoothingQuality;
   }
 
-  export interface SetDataOptions {
+  export interface SetDataOptions
+  {
     x?: number;
     y?: number;
     width?: number;
@@ -84,21 +127,24 @@ declare namespace Cropper {
     scaleY?: number;
   }
 
-  export interface SetCanvasDataOptions {
+  export interface SetCanvasDataOptions
+  {
     left?: number;
     top?: number;
     width?: number;
     height?: number;
   }
 
-  export interface SetCropBoxDataOptions {
+  export interface SetCropBoxDataOptions
+  {
     left?: number;
     top?: number;
     width?: number;
     height?: number;
   }
 
-  export interface Options {
+  export interface Options
+  {
     aspectRatio?: number;
     autoCrop?: boolean;
     autoCropArea?: number;
@@ -106,12 +152,12 @@ declare namespace Cropper {
     center?: boolean;
     checkCrossOrigin?: boolean;
     checkOrientation?: boolean;
-    crop?(event: CustomEvent): void;
+    crop?( event: CustomEvent ): void;
     cropBoxMovable?: boolean;
     cropBoxResizable?: boolean;
-    cropend?(event: CustomEvent): void;
-    cropmove?(event: CustomEvent): void;
-    cropstart?(event: CustomEvent): void;
+    cropend?( event: CustomEvent ): void;
+    cropmove?( event: CustomEvent ): void;
+    cropstart?( event: CustomEvent ): void;
     data?: Data;
     dragMode?: DragMode;
     guides?: boolean;
@@ -125,7 +171,7 @@ declare namespace Cropper {
     modal?: boolean;
     movable?: boolean;
     preview?: Element | Element[] | NodeList | string;
-    ready?(event: CustomEvent): void;
+    ready?( event: CustomEvent ): void;
     responsive?: boolean;
     restore?: boolean;
     rotatable?: boolean;
@@ -133,42 +179,11 @@ declare namespace Cropper {
     toggleDragModeOnDblclick?: boolean;
     viewMode?: ViewMode;
     wheelZoomRatio?: number;
-    zoom?(event: CustomEvent): void;
+    zoom?( event: CustomEvent ): void;
     zoomOnTouch?: boolean;
     zoomOnWheel?: boolean;
     zoomable?: boolean;
   }
-}
-
-declare class Cropper {
-  constructor(element: HTMLImageElement | HTMLCanvasElement, options?: Cropper.Options);
-  clear(): Cropper;
-  crop(): Cropper;
-  destroy(): Cropper;
-  disable(): Cropper;
-  enable(): Cropper;
-  getCanvasData(): Cropper.CanvasData;
-  getContainerData(): Cropper.ContainerData;
-  getCropBoxData(): Cropper.CropBoxData;
-  getCroppedCanvas(options?: Cropper.GetCroppedCanvasOptions): HTMLCanvasElement;
-  getData(rounded?: boolean): Cropper.Data;
-  getImageData(): Cropper.ImageData;
-  move(offsetX: number, offsetY?: number): Cropper;
-  moveTo(x: number, y?: number): Cropper;
-  replace(url: string, onlyColorChanged?: boolean): Cropper;
-  reset(): Cropper;
-  rotate(degree: number): Cropper;
-  rotateTo(degree: number): Cropper;
-  scale(scaleX: number, scaleY?: number): Cropper;
-  scaleX(scaleX: number): Cropper;
-  scaleY(scaleY: number): Cropper;
-  setAspectRatio(aspectRatio: number): Cropper;
-  setCanvasData(data: Cropper.SetCanvasDataOptions): Cropper;
-  setCropBoxData(data: Cropper.SetCropBoxDataOptions): Cropper;
-  setData(data: Cropper.SetDataOptions): Cropper;
-  setDragMode(dragMode: Cropper.DragMode): Cropper;
-  zoom(ratio: number): Cropper;
-  zoomTo(ratio: number, pivot?: {x: number; y: number}): Cropper;
 }
 
 declare module 'cropperjs' {
